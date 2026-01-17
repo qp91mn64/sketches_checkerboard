@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/16
+ * 2026/1/15 - 2026/1/17
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -34,7 +34,7 @@ void setup() {
   noStroke();
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      Checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+      checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
     }
   }
 }
@@ -45,10 +45,10 @@ void mousePressed() {
   y = h * mouseY / height;
   if (mouseButton == LEFT && data[y][x] < dataMax) {
     data[y][x]++;
-    Checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+    checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
   } else if (mouseButton == RIGHT && data[y][x] > dataMin) {
     data[y][x]--;
-    Checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+    checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
   }
 }
 void keyPressed() {
@@ -65,7 +65,7 @@ void keyPressed() {
       break;
   }
 }
-void Checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
+void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
   // 矩形区域里面画棋盘格。
   // 画满整个区域，最右边和最下边可能有不完整的格子。
   // 参数：

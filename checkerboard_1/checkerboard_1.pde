@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/16
+ * 2026/1/15 - 2026/1/17
  *
  * 在屏幕上画棋盘格的函数
  */
@@ -8,12 +8,12 @@ void setup() {
   noStroke();
 }
 void draw() {
-  Checkerboard(0, 0, width/2, height/2, 16);
-  Checkerboard(width/2, 0, width/2, height/2, 40);
-  Checkerboard2(0, height/2, width/2, height/2, 16);
-  Checkerboard2(width/2, height/2, width/2, height/2, 40);
+  checkerboard(0, 0, width/2, height/2, 16);
+  checkerboard(width/2, 0, width/2, height/2, 40);
+  checkerboard2(0, height/2, width/2, height/2, 16);
+  checkerboard2(width/2, height/2, width/2, height/2, 40);
 }
-void Checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
+void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
   // 矩形区域里面画棋盘格。
   // 只画完整的小格子，最右边和最下边可能没有格子。
   // 参数：
@@ -34,7 +34,7 @@ void Checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight,
     rect(x0 + dx * a, y0 + dy * a, a, a);
   }
 }
-void Checkerboard2(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
+void checkerboard2(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
   // 矩形区域里面画棋盘格。
   // 画满整个区域，最右边和最下边可能有不完整的格子。
   // 参数：

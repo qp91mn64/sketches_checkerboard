@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/16
+ * 2026/1/15 - 2026/1/17
  *
  * 演示读取文本文件中的数据再画图案
  * 这样就可以用现成数据
@@ -23,11 +23,11 @@ void setup() {
 void draw() {
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      Checkerboard(x * width/w, y * height/h, width/w, height/h, int(pow(2, data[y][x])));
+      checkerboard(x * width/w, y * height/h, width/w, height/h, int(pow(2, data[y][x])));
     }
   }
 }
-void Checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
+void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight, int a) {
   // 矩形区域里面画棋盘格。
   // 画满整个区域，最右边和最下边可能有不完整的格子。
   // 参数：
