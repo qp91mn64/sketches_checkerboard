@@ -6,8 +6,8 @@
  * 画图案时，则按照区域位置读取数据，作为图案参数
  * 
  * 这里用棋盘格图案，格子边长 a 作为图案参数，
- * 计算公式：a = int(pow(2, data[x][y]))
- * 其中 data[x][y] = x ^ y
+ * 计算公式：a = int(pow(2, data[y][x]))
+ * 其中 data[y][x] = x ^ y
  */
 int w = 8;
 int h = 8;
@@ -20,7 +20,7 @@ void setup() {
 void draw() {
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      checkerboard(x * width/w, y * height/h, width/w, height/h, int(pow(2, data[x][y])));
+      checkerboard(x * width/w, y * height/h, width/w, height/h, int(pow(2, data[y][x])));
     }
   }
 }
@@ -58,12 +58,11 @@ void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight,
   }
 }
 int[][] generateData(int w, int h) {
-  // 生成int[w][h]的二维数组
-  // 这里保证存入与读出数据的方式相同即可
-  int[][] data = new int[w][h];
+  // 生成int[h][w]的二维数组
+  int[][] data = new int[h][w];
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      data[x][y] = x ^ y;
+      data[y][x] = x ^ y;
     }
   }
   return data;

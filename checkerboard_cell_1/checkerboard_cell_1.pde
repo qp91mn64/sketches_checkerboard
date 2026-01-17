@@ -21,7 +21,7 @@ void setup() {
 void draw() {
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      checkerboard(x * width/w, y * height/h, width/w, height/h, int(pow(2, data[x][y])));
+      checkerboard(x * width/w, y * height/h, width/w, height/h, int(pow(2, data[y][x])));
     }
   }
 }
@@ -59,11 +59,11 @@ void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight,
   }
 }
 int[][] generateData(int w, int h) {
-  // 生成int[w][h]的二维数组
-  int[][] data = new int[w][h];
+  // 生成int[h][w]的二维数组
+  int[][] data = new int[h][w];
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      data[x][y] = x + y;
+      data[y][x] = x + y;
     }
   }
   return data;
