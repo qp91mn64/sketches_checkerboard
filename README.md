@@ -4,6 +4,14 @@
 
 使用 `Processing 4.3.2` 写的代码。
 
+## 灵感来源
+
+主要是 2026 年 1 月份自己用画图软件画的 [black_white_1.png](why_start_the_repo/black_white_1.png)
+
+以及从之前自己写的代码受到的启发。
+
+[详细的灵感来源](why_start_the_repo/inspiration.md)
+
 ## 目前代码
 
 - `checkerboard_1.pde`：画棋盘格
