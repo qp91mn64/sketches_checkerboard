@@ -25,6 +25,7 @@ int y;
 int dataMax = 7;
 int dataMin = 0;
 int[][] data = new int[h][w];
+boolean r;
 String[] dataStrings;
 String fileName;
 void setup() {
@@ -39,6 +40,14 @@ void setup() {
   }
 }
 void draw() {
+  if (r) {
+    for (int x = 0; x < w; x++) {
+      for (int y = 0; y < h; y++) {
+        checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+      }
+    }
+  r = !r;
+  }
 }
 void mousePressed() {
   x = w * mouseX / width;
@@ -54,6 +63,7 @@ void mousePressed() {
 void keyPressed() {
   switch (key) {
     case 'r':
+      r = true;
       data = new int[h][w];
       break;
     case 's':
