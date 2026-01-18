@@ -56,3 +56,7 @@ Processing 是一种开源的编程语言，也是一个开发环境，与多种
 Processing 最新版本下载地址：[https://processing.org/download](https://processing.org/download)
 
 下载特定版本：[https://github.com/processing/processing4/releases](https://github.com/processing/processing4/releases)
+
+## 许可证
+
+本代码仓库采用 MIT 许可证。详见 [LICENSE](LICENSE)。
