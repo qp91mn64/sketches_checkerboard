@@ -1,6 +1,9 @@
 # sketches_checkerboard 棋盘格
 
-把画布分成网格，每个网格对应一个数字，根据数字大小填上棋盘格，或密集或稀疏。
+![示例图片](checkerboard_cell_interaction/examples/data_7179.png)  
+[checkerboard_cell_interaction/examples/data_7179.png](checkerboard_cell_interaction/examples/data_7179.png)
+
+把画布分成网格区域，每个区域对应一个数字，根据数字大小填上棋盘格，或密集或稀疏。
 
 使用 `Processing 4.3.2` 写的代码。
 
