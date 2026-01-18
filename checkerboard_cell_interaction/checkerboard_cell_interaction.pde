@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/17
+ * 2026/1/15 - 2026/1/18
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -22,7 +22,7 @@ int W;
 int H;
 int x;
 int y;
-int dataMax = 7;
+int dataMax;  // 不用徒手调
 int dataMin = 0;
 int[][] data = new int[h][w];
 boolean r;
@@ -33,6 +33,11 @@ void setup() {
   W = width / w;
   H = height / h;
   noStroke();
+  int i = dataMin;
+  while (int(pow(2, i)) < max(W, H)) {
+    i++;
+  }
+  dataMax = i;
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
       checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
