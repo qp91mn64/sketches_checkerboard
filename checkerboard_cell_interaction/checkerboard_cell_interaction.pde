@@ -12,12 +12,14 @@
  * 按下 s 键保存数据和当前画布
  * 按下 r 键重置
  *
- * 注意不能撤回操作，而且可能会看起来有点眼花缭乱
+ * 注意不能撤回操作
+ * 屏幕分辨率不够就不用尝试 1024x1024 或者更大的画布尺寸了，以免最后一排点不到。
+ * 此外画布尺寸太大，就算画布能全部显示，画到后面也可能有点眼花缭乱
  * 
  * a 的计算公式：a = int(pow(2, data[y][x]))
  */
-int w = 8;
-int h = 8;
+int w = 8;  // 区域列数，调这个试一试
+int h = 8;  // 区域行数，调这个试一试
 int W;
 int H;
 int x;
@@ -29,7 +31,7 @@ boolean r;
 String[] dataStrings;
 String fileName;
 void setup() {
-  size(1024, 1024);
+  size(512, 512);  // 调这个试一试，例如256，1024
   W = width / w;
   H = height / h;
   noStroke();
