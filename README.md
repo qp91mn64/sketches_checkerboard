@@ -31,6 +31,8 @@
 
 - `checkerboard_cell_interaction.pde`：点一下鼠标改变区域里面的棋盘格外观，看能不能用不同疏密的棋盘格画出什么图案
 
+- `checkerboard_cell_interaction_2`：这个草图一共由 4 份不同的代码文件组成；`checkerboard_cell_interaction_2.pde` 是主代码，同时画图，`Grid.pde` 定义了 `Grid` 类负责数据，`Pattern.pde` 里面是图案模式的抽象类 `Pattern`，`CheckerboardPattern.pde` 里面则定义新类 `CheckerboardPattern` 继承 `Pattern` 抽象类，负责图案的具体实现。使用抽象类是受 DeepSeek 启发。与  `checkerboard_cell_with_interaction.pde` 相比，主要是换了种代码结构，同时加上了 `checkerboard_cell_with_load_data.pde` 演示的加载外部数据的功能。目的是便于复用和扩展。
+
 ## 使用方式
 
 一般地，用 Processing 4 打开直接运行即可。
@@ -40,6 +42,8 @@
 `checkerboard_cell_with_interaction.pde` 的默认画布大小是 512x512 像素，如果调太大了，最底下的部分点不到，尽管保存图片不受影响，看起来却是空的不太美观，而且画到后面有可能会看起来眼花缭乱。注意没有撤回功能。
 
 这里所有区域都是相同大小的，且区域宽度 `W = width / w`，区域高度 `H = height / h`。
+
+对 `checkerboard_cell_with_interaction_2`，使用方法与 `checkerboard_cell_with_interaction.pde` 类似。此外，如果你不满足于目前图案，想画不同于示例的图案，按照现在的结构，修改 `CheckerboardPattern` 中的 `display` 方法即可；如果想扩展原有代码，同时画多种不同图案，新建一个文件，模仿 `CheckerboardPattern` 写一个新类，继承 `Pattern` 抽象类，重写 `display` 方法，即可在主文件或者任何画图的地方调用。
 
 ## 关于Processing
 
