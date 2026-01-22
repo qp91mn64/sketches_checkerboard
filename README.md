@@ -35,6 +35,8 @@
 
 - `checkerboard_cell_complementary`：这个草图一共由 5 份不同的代码文件组成；与 `checkerboard_cell_interaction_2` 相比，多出的文件（不考虑主文件的命名差异） `CheckerboardPattern2.pde` 用类似的方式，定义新类 `CheckerboardPattern2` 继承 `Pattern` 抽象类，画黑白互补的棋盘格，同时数据范围从原来的 `0` 到 `dataMax` 之间扩展为 `-dataMax-1` 到 `dataMax` 之间，表示范围翻了一倍，扩展了能画出的图形范围，同时现有的代码结构也开始触及其中独特的美————这种美有两重，代码结构对称互补，能表示的图形也是对称互补的；而且代码结构触及二进制、补码、按位取反。
 
+- `c_XOR.pde`：棋盘格的本质是异或？按位异或画棋盘格。此外为了少打字母就把 checkerboard 简写成 c。
+
 ## 使用方式
 
 一般地，用 Processing 4 打开直接运行即可。
