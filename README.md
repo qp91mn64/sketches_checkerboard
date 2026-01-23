@@ -37,6 +37,8 @@
 
 - `c_XOR.pde`：棋盘格的本质是异或？按位异或画棋盘格。此外为了少打字母就把 checkerboard 简写成 c。
 
+- `c_XOR_2.pde`：在 `c_XOR.pde` 的基础上，引入索引值 `a`，先计算按位异或 `x ^ y` ，再取 `a` 补码中所有 `1` 对应的位，这些位只要有 `1`，结果就是 `1`，填充白色，全 `0`，得 `0`，填充黑色。`a` 等于 `1` 即 `c_XOR.pde` 画的情形。看看能不能画出嵌套、层次、分形
+
 ## 使用方式
 
 一般地，用 Processing 4 打开直接运行即可。
@@ -50,6 +52,8 @@
 对 `checkerboard_cell_with_interaction_2`，使用方法与 `checkerboard_cell_with_interaction.pde` 类似。此外，如果你不满足于目前图案，想画不同于示例的图案，按照现在的结构，修改 `CheckerboardPattern` 中的 `display` 方法即可；如果想扩展原有代码，同时画多种不同图案，新建一个文件，模仿 `CheckerboardPattern` 写一个新类，继承 `Pattern` 抽象类，重写 `display` 方法，即可在主文件或者任何画图的地方调用。
 
 对 `checkerboard_cell_complementary`，使用方法与 `checkerboard_cell_with_interaction2` 类似，最大的不同是可以尝试多点击几下鼠标右键得到黑白互补的棋盘格图案了，这样就扩展了能画出的图形范围。
+
+对 `c_XOR_2.pde`：点击鼠标左键右键查看不同图形，同时也可以查看控制台的输出与画出的图形之间的联系。看看能不能画出嵌套、层次、分形。
 
 ## 关于Processing
 
