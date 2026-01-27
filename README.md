@@ -43,6 +43,8 @@
 
 于是在 `c_AND_2.pde` 基础上，有了 `c_AND_2a.pde`、`c_AND_2b.pde`，通过迭代 `a` 的值，从两个不同角度参尝试理解这种图形怎么得到的。前者从最细节开始构建，点阵从小到大；后者从最大的空白开始，点阵从大到小。
 
+- `c_XOR_3_I.pde`：`c_XOR_2.pde` 的图案，复用并稍微调整 `checkerboard_cell_interaction_2` 的结构，扩展了参数值的范围，以及能用的图案的种类。`I` 指类似于 `checkerboard_cell_interaction_2` 等草图的代码结构和交互方式。
+
 ## 使用方式
 
 一般地，用 Processing 4 打开直接运行即可。
