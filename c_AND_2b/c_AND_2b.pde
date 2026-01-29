@@ -63,8 +63,8 @@ void setup() {
 }
 void draw() {
   int color1;
-  for (int x = 0; x < width / cellWidth; x++) {
-    for (int y = 0; y < height / cellHeight; y++) {
+  for (int x = 0; x < (width - 1) / cellWidth + 1; x++) {  // 这样当 width 不能被 cellWidth 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
+    for (int y = 0; y < (height - 1) / cellHeight + 1; y++) {  // 这样当 height 不能被 cellHeight 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
       color1 = (x & y) & a;  // 先把坐标x、y按位与再和变量 a 按位与，保留相应位的值。
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算

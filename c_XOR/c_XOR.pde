@@ -32,8 +32,8 @@ void draw() {
   int color1;
   int x1;
   int y1;
-  for (int x = 0; x < width / cellWidth; x++) {
-    for (int y = 0; y < height / cellHeight; y++) {
+  for (int x = 0; x < (width - 1) / cellWidth + 1; x++) {  // 这样当 width 不能被 cellWidth 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
+    for (int y = 0; y < (height - 1) / cellHeight + 1; y++) {  // 这样当 height 不能被 cellHeight 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
       x1 = x & 1;  // 受DeepSeek启发加上之前写的详细的按位与按位或按位异或文档（文档已公开，详见 https://github.com/qp91mn64/sketches_black_white/blob/main/docs/bitwise_AND_OR_XOR_detailed.md）
       y1 = y & 1;  // 取最低位直接用按位与就够了
       color1 = x1 ^ y1;  // 然后按位异或
