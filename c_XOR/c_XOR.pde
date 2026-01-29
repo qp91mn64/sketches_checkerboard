@@ -1,5 +1,5 @@
 /**
- * 2026/1/22
+ * 2026/1/22 - 2026/1/29
  * 
  * 棋盘格的本质是异或？
  * 
@@ -22,8 +22,8 @@
  * 
  * c_XOR.pde 是简写，c 代表 checkerboard，为了偷点懒少打字母
  */
-int w = 4;
-int h = 4;
+int cellWidth = 4;  // 格子宽度
+int cellHeight = 4;  // 格子高度
 void setup() {
   size(128,128);
   noStroke();
@@ -32,13 +32,13 @@ void draw() {
   int color1;
   int x1;
   int y1;
-  for (int x = 0; x < width/w; x++) {
-    for (int y = 0; y < height/h; y++) {
+  for (int x = 0; x < width / cellWidth; x++) {
+    for (int y = 0; y < height / cellHeight; y++) {
       x1 = x & 1;  // 受DeepSeek启发加上之前写的详细的按位与按位或按位异或文档（文档已公开，详见 https://github.com/qp91mn64/sketches_black_white/blob/main/docs/bitwise_AND_OR_XOR_detailed.md）
       y1 = y & 1;  // 取最低位直接用按位与就够了
       color1 = x1 ^ y1;  // 然后按位异或
       fill(255 * color1);  // 最左上角代表0，黑色
-      rect(x*w, y*h, w, h);
+      rect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
   }
 }

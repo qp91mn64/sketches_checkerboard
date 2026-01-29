@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/1/23
+ * 2026/1/22 - 2026/1/29
  * 
  * 棋盘格的本质是异或？
  * 
@@ -46,8 +46,8 @@
  * 
  * c_XOR_2.pde 中的 c 代表 checkerboard
  */
-int w = 1;
-int h = 1;
+int cellWidth = 1;  // 格子宽度
+int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入和索引值，取其补码中所有 1 所在位
 void setup() {
   size(512,512);
@@ -55,14 +55,14 @@ void setup() {
 }
 void draw() {
   int color1;
-  for (int x = 0; x < width/w; x++) {
-    for (int y = 0; y < height/h; y++) {
+  for (int x = 0; x < width / cellWidth; x++) {
+    for (int y = 0; y < height / cellHeight; y++) {
       color1 = (x ^ y) & a;  // 先把坐标x、y按位异或再和变量 a 按位与，保留相应位的值。
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
       }
       fill(255 * color1);  // 最左上角代表0，黑色。填充的颜色（灰度）值大于最大值就不画？
-      rect(x*w, y*h, w, h);
+      rect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
     }
   }
 }
