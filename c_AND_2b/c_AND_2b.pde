@@ -31,6 +31,7 @@
  * 左键 a 多一位 1
  * 右键 a 少一位 1
  * 控制台查看 a 的值以及补码
+ * 按 s 键保存图片
  * 
  * 按位异或计算规则是
  * 对每一位
@@ -51,18 +52,20 @@ int cellWidth = 1;  // 格子宽度
 int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入索引值，取其补码中所有 1 所在位
 int a1 = 1;
-int lastBits = 1;
+int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
 void setup() {
   size(512, 512);
   noStroke();
   int i = 2;
   while (i < max(width, height)) {  // 2 的 lastBits 次幂不小于画布宽度与高度的较大者时
     i *= 2;                         // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
-    lastBits += 1;                  // 与其余位无关，可以忽略
-  }                                 // 无论 a 正负，最后 lastBits 位也不包括符号位
+    lastBits += 1;                  // 与其余位无关，可以忽略，无论 a 正负
+  }                                 // 最后 lastBits 位也不包括符号位
   a1 = 1 << (lastBits - 1);  // 在现成的 lastBits 的基础上，左移 (lastBits - 1) 位即可
   a = a1;                    // 注意这里的 a、a1 小于画布长边，从而迭代时每个值都有用
-  println(a,a1);
+  println(i, lastBits);
+  println("a", a, binary(a, lastBits));
+  println(a1, binary(a1, lastBits));
 }
 void draw() {
   int color1;
@@ -81,12 +84,19 @@ void mousePressed() {
   if (mouseButton == LEFT && (a1 >> 1) > 0) {  // 防止 a1 变成 0
     a1 = (a1>>1);  // 先把 a1 按位右移一位
     a += a1;  // 再加到 a 上，相当于把 a 的低一位置 1
-    println("a",a, binary(a));
-    println(a1, binary(a1));
+    println("a", a, binary(a, lastBits));
+    println(a1, binary(a1, lastBits));
   } else if (mouseButton == RIGHT && (a1 << 1) > 0 && (a != a1)) { // 防止 a 变成 0
     a -= a1;  // 先把 a 的低一位清零
     a1 = (a1<<1);  // 再把 a1 按位左移一位
-    println("a",a, binary(a));
-    println(a1, binary(a1));
+    println("a", a, binary(a, lastBits));
+    println(a1, binary(a1, lastBits));
+  }
+}
+void keyPressed() {
+  if (key == 's') {
+    String s = String.format("output/c_AND_2b a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+    saveFrame(s);
+    println(String.format("已保存：%s", s));
   }
 }

@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/1/29
+ * 2026/1/22 - 2026/1/30
  * 
  * 把画布看成网格
  * 每个格子 x、y 坐标的二进制表示
@@ -25,6 +25,7 @@
  * 左键 a 加 1
  * 右键 a 减 1
  * 控制台查看 a 的值以及补码
+ * 按 s 键保存图片
  * 
  * 按位异或计算规则是
  * 对每一位
@@ -44,9 +45,17 @@
 int cellWidth = 1;  // 格子宽度
 int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入索引值，取其补码中所有 1 所在位
+int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
 void setup() {
   size(512,512);
   noStroke();
+  int i = 2;
+  while (i < max(width, height)) {  // 2 的 lastBits 次幂不小于画布宽度与高度的较大者时
+    i *= 2;                         // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
+    lastBits += 1;                  // 与其余位无关，可以忽略，无论 a 正负
+  }                                 // 最后 lastBits 位也不包括符号位
+  println(i, lastBits);
+  println(a, binary(a, lastBits));
 }
 void draw() {
   int color1;
@@ -64,9 +73,16 @@ void draw() {
 void mousePressed() {
   if (mouseButton == LEFT) {
     a++;
-    println(a, binary(a));
+    println(a, binary(a, lastBits));
   } else if (mouseButton == RIGHT) {
     a--;
-    println(a, binary(a));
+    println(a, binary(a, lastBits));
+  }
+}
+void keyPressed() {
+  if (key == 's') {
+    String s = String.format("output/c_AND_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+    saveFrame(s);
+    println(String.format("已保存：%s", s));
   }
 }
