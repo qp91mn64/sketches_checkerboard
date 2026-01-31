@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/18
+ * 2026/1/15 - 2026/1/31
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -32,8 +32,8 @@ String[] dataStrings;
 String fileName;
 void setup() {
   size(512, 512);  // 调这个试一试，例如256，1024
-  W = width / w;
-  H = height / h;
+  W = width / w;  // 每个矩形区域宽度
+  H = height / h;  // 每个矩形区域高度
   noStroke();
   int i = dataMin;
   while (int(pow(2, i)) < max(W, H)) {
@@ -57,8 +57,11 @@ void draw() {
   }
 }
 void mousePressed() {
-  x = w * mouseX / width;
-  y = h * mouseY / height;
+  x = mouseX / W;  // 矩形区域 x 坐标
+  y = mouseY / H;  // 矩形区域 y 坐标
+  if (x >= w || x < 0 || y >= h || y < 0) {  // 限制坐标范围
+    return;                                  // 超出画图区域的部分，点不动即可
+  }
   if (mouseButton == LEFT && data[y][x] < dataMax) {
     data[y][x]++;
     checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));

@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/21
+ * 2026/1/15 - 2026/1/31
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -48,8 +48,8 @@ CheckerboardPattern pattern = new CheckerboardPattern();  // 然后实例化这�
 CheckerboardPattern2 pattern2 = new CheckerboardPattern2();  // 然后实例化这个子类
 void setup() {
   size(512, 512);  // 调这个试一试，例如 256，1024
-  W = width / w;
-  H = height / h;
+  W = width / w;  // 每个矩形区域宽度
+  H = height / h;  // 每个矩形区域高度
   noStroke();
   int i = 0;
   while (int(pow(2, i)) < max(W, H)) {
@@ -75,8 +75,11 @@ void draw() {
   }
 }
 void mousePressed() {
-  int x = w * mouseX / width;
-  int y = h * mouseY / height;
+  int x = mouseX / W;  // 矩形区域 x 坐标
+  int y = mouseY / H;  // 矩形区域 y 坐标
+  if (x >= w || x < 0 || y >= h || y < 0) {  // 限制坐标范围
+    return;                                  // 超出画图区域的部分，点不动即可
+  }
   if (mouseButton == LEFT) {
     grid.updateValue(x, y, '+');
     drawPattern(x, y);

@@ -1,5 +1,6 @@
 /**
  * 创建时间：2026/1/27
+ * 最近一次修改时间：2026/1/31
  * 在 c_XOR_2.pde 画棋盘格推广的基础上
  * 借助 checkerboard_cell_interaction_2 （编写时间：2026/1/15 - 2026/1/20）的代码框架
  * 实现点击鼠标就能用不同图案画图形
@@ -20,8 +21,8 @@ Grid grid;
 Pattern1 pattern = new Pattern1();  // 然后实例化这个子类
 void setup() {
   size(512, 512);  // 调这个试一试
-  W = width / w;
-  H = height / h;
+  W = width / w;  // 每个矩形区域宽度
+  H = height / h;  // 每个矩形区域高度
   noStroke();
   int i = 1;
   while (i < max(width/i, height/h)) {
@@ -46,8 +47,11 @@ void draw() {
   }
 }
 void mousePressed() {
-  x = w * mouseX / width;
-  y = h * mouseY / height;
+  x = mouseX / W;  // 矩形区域 x 坐标
+  y = mouseY / H;  // 矩形区域 y 坐标
+  if (x >= w || x < 0 || y >= h || y < 0) {  // 限制坐标范围
+    return;                                  // 超出画图区域的部分，点不动即可
+  }
   if (mouseButton == LEFT) {
     grid.updateValue(x, y, '+');
     pattern.display(x * W, y * H, W, H, grid.data[y][x]);  // 调用子类里面的 display 方法即可
