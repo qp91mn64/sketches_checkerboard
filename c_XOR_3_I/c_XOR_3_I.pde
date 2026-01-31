@@ -67,10 +67,19 @@ void keyPressed() {
       r = true;
       break;
     case 's':
+      int w1 = w * W;  // 有效画图区域宽度
+      int h1 = h * H;  // 有效画图区域高度
+      PImage image1 = createImage(w1, h1, RGB);
+      loadPixels();
+      for (int i = 0; i < w1 * h1; i++) {
+        int indexX = i % w1;
+        int indexY = i / w1;
+        image1.pixels[i] = pixels[indexY * width + indexX];  // 去除当 width 不能被 w 整除，或者 height 不能被 h 整除时，产生的不美观的灰边
+      }
       int a1 = int(random(10000));
       fileName = String.format("output/data_%d.txt", a1);
       grid.saveData(fileName);
-      saveFrame(String.format("output/data_%d.png", a1));
+      image1.save(String.format("output/data_%d.png", a1));
       println("已保存");
       break;
   }
