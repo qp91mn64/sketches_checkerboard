@@ -90,7 +90,7 @@ void keyPressed() {
       fileName = String.format("data_%d.txt", a);
       saveData(fileName, data);
       image1.save(String.format("data_%d.png", a));
-      println("已保存");
+      println("已保存",String.format("data_%d", a));
       break;
   }
 }

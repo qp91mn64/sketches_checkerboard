@@ -80,7 +80,7 @@ void keyPressed() {
       fileName = String.format("output/data_%d.txt", a1);
       grid.saveData(fileName);
       image1.save(String.format("output/data_%d.png", a1));
-      println("已保存");
+      println("已保存",String.format("data_%d", a1));
       break;
   }
 }
