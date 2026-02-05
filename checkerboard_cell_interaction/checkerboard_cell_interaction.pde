@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/31
+ * 2026/1/15 - 2026/2/5
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -87,10 +87,11 @@ void keyPressed() {
         image1.pixels[i] = pixels[indexY * width + indexX];  // 去除当 width 不能被 w 整除，或者 height 不能被 h 整除时，产生的不美观的灰边
       }
       int a = int(random(10000));
-      fileName = String.format("data_%d.txt", a);
+      String s = String.format("your_output/data_%d", a);
+      fileName = s + ".txt";
       saveData(fileName, data);
-      image1.save(String.format("data_%d.png", a));
-      println("已保存",String.format("data_%d", a));
+      image1.save(s + ".png");
+      println(String.format("已保存：%s", s));
       break;
   }
 }

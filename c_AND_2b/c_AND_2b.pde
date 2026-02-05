@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/1/30
+ * 2026/1/22 - 2026/2/5
  * 
  * 用按位与得到类似谢尔宾斯基三角形分形图
  * 迭代理解，方式二：从最大的空白开始，点阵从大到小
@@ -95,7 +95,7 @@ void mousePressed() {
 }
 void keyPressed() {
   if (key == 's') {
-    String s = String.format("output/c_AND_2b a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+    String s = String.format("your_output/c_AND_2b a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
     saveFrame(s);
     println(String.format("已保存：%s", s));
   }

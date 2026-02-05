@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/1/30
+ * 2026/1/22 - 2026/2/5
  * 
  * 把画布看成网格
  * 每个格子 x、y 坐标的二进制表示
@@ -81,7 +81,7 @@ void mousePressed() {
 }
 void keyPressed() {
   if (key == 's') {
-    String s = String.format("output/c_AND_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+    String s = String.format("your_output/c_AND_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
     saveFrame(s);
     println(String.format("已保存：%s", s));
   }

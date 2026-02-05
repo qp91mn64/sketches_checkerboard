@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/1/27
- * 最近一次修改时间：2026/1/31
+ * 最近一次修改时间：2026/2/5
  * 在 c_XOR_2.pde 画棋盘格推广的基础上
  * 借助 checkerboard_cell_interaction_2 （编写时间：2026/1/15 - 2026/1/20）的代码框架
  * 实现点击鼠标就能用不同图案画图形
@@ -77,10 +77,11 @@ void keyPressed() {
         image1.pixels[i] = pixels[indexY * width + indexX];  // 去除当 width 不能被 w 整除，或者 height 不能被 h 整除时，产生的不美观的灰边
       }
       int a1 = int(random(10000));
-      fileName = String.format("output/data_%d.txt", a1);
+      String s = String.format("your_output/data_%d", a1);
+      fileName = s + ".txt";
       grid.saveData(fileName);
-      image1.save(String.format("output/data_%d.png", a1));
-      println("已保存",String.format("data_%d", a1));
+      image1.save(s + ".png");
+      println(String.format("已保存：%s", s));
       break;
   }
 }
