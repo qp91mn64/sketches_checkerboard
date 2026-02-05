@@ -111,4 +111,7 @@ Processing 最新版本下载地址：[https://processing.org/download](https://
 
 ## 许可证
 
-本代码仓库采用 MIT 许可证。详见 [LICENSE](LICENSE)。
+如无特别说明，许可方式如下：
+
+- 代码：MIT 许可证。详见 [LICENSE](LICENSE)。
+- 文档，示例数据和图片：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。
