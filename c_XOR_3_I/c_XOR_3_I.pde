@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/1/27
- * 最近一次修改时间：2026/2/5
+ * 最近一次修改时间：2026/2/6
  * 在 c_XOR_2.pde 画棋盘格推广的基础上
  * 借助 checkerboard_cell_interaction_2 （编写时间：2026/1/15 - 2026/1/20）的代码框架
  * 实现点击鼠标就能用不同图案画图形
@@ -25,7 +25,7 @@ void setup() {
   H = height / h;  // 每个矩形区域高度
   noStroke();
   int i = 1;
-  while (i < max(width/i, height/h)) {
+  while (i < max(W, H)) {
     i *= 2;
   }
   dataMax = i - 1;
