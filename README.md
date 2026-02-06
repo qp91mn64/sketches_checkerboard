@@ -1,7 +1,7 @@
 # sketches_checkerboard 不只是棋盘格
 
-![示例图片3](c_XOR_3_I/examples/data_9134.png)  
-[c_XOR_3_I/examples/data_9134.png](c_XOR_3_I/examples/data_9134.png)
+![示例图片3](c_XOR_3_I_C/examples/example1.png)  
+[c_XOR_3_I_C/examples/example1.png](c_XOR_3_I_C/examples/example1.png)
 
 ![示例图片2](checkerboard_cell_complementary/examples/data_4726.png)  
 [checkerboard_cell_complementary/examples/data_4726.png](checkerboard_cell_complementary/examples/data_4726.png)
@@ -27,6 +27,7 @@
 
 - `AND`、`OR`、`XOR`：与，或，异或，也可理解为按位与、按位或、按位异或省略 `bitwise`。
 - `I`：Interaction，这里专门指与 `checkerboard_cell_interaction_2` 类似的代码结构和交互方式。
+- `C`：Complementary，与 `checkerboard_cell_complementary` 类似，支持两种结构相似、黑白互补的图案。
 
 ### 画棋盘格
 
@@ -46,8 +47,11 @@
 - `checkerboard_cell_interaction_2`：尺寸倍增棋盘格图案
 - `checkerboard_cell_complementary`：尺寸倍增棋盘格图案 + 黑白互补棋盘格图案
 - `c_XOR_3_I`：更多种类图案，不只有棋盘格
+- `c_XOR_3_I_C`：棋盘格图案推广 + 黑白互补
 
 使用方式：点一下鼠标左键/右键，改变区域里面的棋盘格外观，看用不同图案能拼接出什么。按 `s` 键保存数据、图形，`r` 键重置画布。
+
+如果点击鼠标太麻烦为什么不试一下用 `grid.loadData()` 加载你的数据文件？
 
 如果你把画布调得太大，尽管优化了一下，重置画布的时候还是要等一下；而且部分区域可能就点不到了，从而得到的图片比较空不好看；此外画到后面可能有点眼花缭乱。
 
@@ -79,6 +83,9 @@
 - `checkerboard_cell_interaction_2`：拆分出类，受到 DeepSeek 启发使用抽象类，**便于复用**。同时加上了 `checkerboard_cell_with_load_data` 演示的加载外部数据的功能以备用。
 - `checkerboard_cell_complementary`：扩展到负数
 - `c_XOR_3_I`：复用 `checkerboard_cell_interaction_2` 的代码结构
+- `c_XOR_3_I_C`：大多数代码复用自之前的草图 `c_XOR_3_I` 和 `checkerboard_cell_complementary`，稍微改一改就出来了，顺便整理了一下
+
+源码都是自己写的（如果不是，例如搬运 AI 代码，会单独说明），而且是 MIT 许可的，你也可以试一试拿去复用，附上原始的版权说明和许可声明（到 [LICENSE](LICENSE) 里面找），说明一下用了我的代码，不要让人误认为都是你自己写的即可。如果好用，尽管不是必须，可以注明一下来源，例如指向本项目的链接，防止下次找不到或者又更新了。
 
 ## 灵感来源
 
