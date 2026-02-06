@@ -1,5 +1,6 @@
 /**
  * 创建时间：2026/2/6
+ * 最近一次修改时间：2026/2/6
  *
  * c_XOR_3_I 的黑白互补版本，C 指 Complementary
  * 大多数代码复用自之前的草图 c_XOR_3_I 和 checkerboard_cell_complementary
@@ -16,6 +17,7 @@ int dataMin;
 String[] dataStrings;
 String fileName;
 boolean r = false;
+boolean isSaved = false;  // 防止重复保存
 Grid grid;
 Pattern XORpattern = new XORPattern();  // 然后实例化这个子类
 Pattern XORpattern_C = new XORPattern_C();  // 然后实例化这个子类
@@ -50,19 +52,27 @@ void mousePressed() {
   if (mouseButton == LEFT) {
     grid.updateValue(x, y, '+');  // 加1
     drawPattern(x, y);
+    isSaved = false;
   } else if (mouseButton == RIGHT) {
     grid.updateValue(x, y, '-');  // 减1
     drawPattern(x, y);
+    isSaved = false;
   }
 }
 void keyPressed() {
   switch (key) {
     case 'r':
+      // 重置
       grid.reset();
       r = true;
+      isSaved = false;
       break;
     case 's':
-      mySave();
+      // 保存
+      if (!isSaved) {
+        mySave();
+        isSaved = true;
+      }
       break;
   }
 }

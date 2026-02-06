@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/2/5
+ * 2026/1/15 - 2026/2/6
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -28,6 +28,7 @@ int dataMax;  // 不用徒手调
 int dataMin = 0;
 int[][] data = new int[h][w];
 boolean r;
+boolean isSaved = false;  // 防止重复保存
 String[] dataStrings;
 String fileName;
 void setup() {
@@ -65,33 +66,41 @@ void mousePressed() {
   if (mouseButton == LEFT && data[y][x] < dataMax) {
     data[y][x]++;
     checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+    isSaved = false;
   } else if (mouseButton == RIGHT && data[y][x] > dataMin) {
     data[y][x]--;
     checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+    isSaved = false;
   }
 }
 void keyPressed() {
   switch (key) {
     case 'r':
+      // 重置
       r = true;
       data = new int[h][w];
+      isSaved = false;
       break;
     case 's':
-      int w1 = w * W;  // 有效画图区域宽度
-      int h1 = h * H;  // 有效画图区域高度
-      PImage image1 = createImage(w1, h1, RGB);
-      loadPixels();
-      for (int i = 0; i < w1 * h1; i++) {
-        int indexX = i % w1;
-        int indexY = i / w1;
-        image1.pixels[i] = pixels[indexY * width + indexX];  // 去除当 width 不能被 w 整除，或者 height 不能被 h 整除时，产生的不美观的灰边
+      // 保存
+      if (!isSaved) {
+        int w1 = w * W;  // 有效画图区域宽度
+        int h1 = h * H;  // 有效画图区域高度
+        PImage image1 = createImage(w1, h1, RGB);
+        loadPixels();
+        for (int i = 0; i < w1 * h1; i++) {
+          int indexX = i % w1;
+          int indexY = i / w1;
+          image1.pixels[i] = pixels[indexY * width + indexX];  // 去除当 width 不能被 w 整除，或者 height 不能被 h 整除时，产生的不美观的灰边
+        }
+        int a = int(random(10000));
+        String s = String.format("your_output/data_%d", a);
+        fileName = s + ".txt";
+        saveData(fileName, data);
+        image1.save(s + ".png");
+        println(String.format("已保存：%s", s));
+        isSaved = true;
       }
-      int a = int(random(10000));
-      String s = String.format("your_output/data_%d", a);
-      fileName = s + ".txt";
-      saveData(fileName, data);
-      image1.save(s + ".png");
-      println(String.format("已保存：%s", s));
       break;
   }
 }
