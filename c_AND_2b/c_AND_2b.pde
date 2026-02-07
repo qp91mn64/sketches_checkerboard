@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/2/5
+ * 2026/1/22 - 2026/2/7
  * 
  * 用按位与得到类似谢尔宾斯基三角形分形图
  * 迭代理解，方式二：从最大的空白开始，点阵从大到小
@@ -48,8 +48,6 @@
  * 
  * c_AND_2.pde 中的 c 原本代表 checkerboard，这里扩展到其他位运算，为了一致保留 c
  */
-int cellWidth = 1;  // 格子宽度
-int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入索引值，取其补码中所有 1 所在位
 int a1 = 1;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
@@ -69,14 +67,14 @@ void setup() {
 }
 void draw() {
   int color1;
-  for (int x = 0; x < (width - 1) / cellWidth + 1; x++) {  // 这样当 width 不能被 cellWidth 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
-    for (int y = 0; y < (height - 1) / cellHeight + 1; y++) {  // 这样当 height 不能被 cellHeight 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
+  for (int x = 0; x < width; x++) {
+    for (int y = 0; y < height; y++) {
       color1 = (x & y) & a;  // 先把坐标x、y按位与再和变量 a 按位与，保留相应位的值。
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
       }
       fill(255 * color1);  // 最左上角代表0，黑色。填充的颜色（灰度）值大于最大值就不画？
-      rect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+      rect(x, y, 1, 1);  // 格子边长大于 1 反而不能充分展示细节
     }
   }
 }
