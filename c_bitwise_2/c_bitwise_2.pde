@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/2/6
- * 最近一次修改时间：2026/2/7
+ * 最近一次修改时间：2026/2/8
  *
  * 修改自 c_bitwise_1
  *
@@ -59,7 +59,7 @@ void draw() {
       }
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
-          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + image1.width / 3 + min(x * cellWidth + dx, image1.width * 2 / 3 - 1)] = color(color1);
+          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + image1.width / 3 + min(x * cellWidth + dx, image1.width / 3 - 1)] = color(color1);
         }
       }
       b = x ^ y;  // 按位异或
@@ -71,7 +71,7 @@ void draw() {
       }
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
-          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + 2 * image1.width / 3 + min(x * cellWidth + dx,image1.width - 1)] = color(color1);
+          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + 2 * image1.width / 3 + min(x * cellWidth + dx,image1.width / 3 - 1)] = color(color1);
         }
       }
     }
