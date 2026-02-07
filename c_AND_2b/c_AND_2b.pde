@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/2/7
+ * 2026/1/22 - 2026/2/8
  * 
  * 用按位与得到类似谢尔宾斯基三角形分形图
  * 迭代理解，方式二：从最大的空白开始，点阵从大到小
@@ -51,6 +51,7 @@
 int a = 1;  // 引入索引值，取其补码中所有 1 所在位
 int a1 = 1;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
+PImage image1;
 void setup() {
   size(512, 512);
   noStroke();
@@ -64,19 +65,22 @@ void setup() {
   println(i, lastBits);
   println("a", a, binary(a, lastBits));
   println(a1, binary(a1, lastBits));
+  image1 = createImage(width, height, RGB);
 }
 void draw() {
   int color1;
+  image1.loadPixels();
   for (int x = 0; x < width; x++) {
     for (int y = 0; y < height; y++) {
       color1 = (x & y) & a;  // 先把坐标x、y按位与再和变量 a 按位与，保留相应位的值。
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
       }
-      fill(255 * color1);  // 最左上角代表0，黑色。填充的颜色（灰度）值大于最大值就不画？
-      rect(x, y, 1, 1);  // 格子边长大于 1 反而不能充分展示细节
+      image1.pixels[y * image1.width + x] = color(color1 * 255);  // 格子边长大于 1 反而不能充分展示细节
     }
   }
+  image1.updatePixels();
+  image(image1, 0, 0);
 }
 void mousePressed() {
   if (mouseButton == LEFT && (a1 >> 1) > 0) {  // 防止 a1 变成 0
@@ -94,7 +98,7 @@ void mousePressed() {
 void keyPressed() {
   if (key == 's') {
     String s = String.format("your_output/c_AND_2b a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-    saveFrame(s);
+    image1.save(s);
     println(String.format("已保存：%s", s));
   }
 }

@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/2/7
+ * 2026/1/22 - 2026/2/8
  * 
  * 用按位与得到类似谢尔宾斯基三角形分形图
  * 迭代理解，方式1：从最细节开始构建，点阵从小到大
@@ -55,6 +55,7 @@ int a1 = 1;
 int xMax;
 int yMax;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
+PImage image1;
 void setup() {
   size(512, 512);
   noStroke();
@@ -68,6 +69,7 @@ void setup() {
   println(i, lastBits);
   println("a", a, binary(a, lastBits));
   println(a1, binary(a1, lastBits));
+  image1 = createImage(width, height, RGB);
 }
 void draw() {
   int color1;
@@ -77,10 +79,16 @@ void draw() {
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
       }
-      fill(255 * color1);  // 最左上角代表0，黑色。填充的颜色（灰度）值大于最大值就不画？
-      rect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+      // 不用矩形而是填充像素点
+      for (int dx = 0; dx < cellWidth; dx++) {
+        for (int dy = 0; dy < cellHeight; dy++) {
+          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + min(x * cellWidth + dx,image1.width - 1)] = color(color1 * 255);
+        }
+      }
     }
   }
+  image1.updatePixels();
+  image(image1, 0, 0);
 }
 void mousePressed() {
   if (mouseButton == LEFT && (a1 << 1) > 0 && (a1<<1) < max(xMax, yMax)) {  // 防止 a1 变成负数再按位右移的时候高位变成 1。这里为了配合 lastBits 就进一步限制 a1 范围，会影响交互细节
@@ -98,7 +106,7 @@ void mousePressed() {
 void keyPressed() {
   if (key == 's') {
     String s = String.format("your_output/c_AND_2a a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-    saveFrame(s);
+    image1.save(s);
     println(String.format("已保存：%s", s));
   }
 }

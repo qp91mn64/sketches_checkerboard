@@ -48,6 +48,7 @@ int a = 1;  // 引入索引值，取其补码中所有 1 所在位
 int xMax;
 int yMax;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
+PImage image1;
 void setup() {
   size(512,512);
   noStroke();
@@ -60,19 +61,27 @@ void setup() {
   }                              // 最后 lastBits 位也不包括符号位
   println(i, lastBits);
   println(a, binary(a, lastBits));
+  image1 = createImage(width, height, RGB);
 }
 void draw() {
   int color1;
+  image1.loadPixels();
   for (int x = 0; x < xMax; x++) {
     for (int y = 0; y < yMax; y++) {
       color1 = (x & y) & a;  // 先把坐标x、y按位与再和变量 a 按位与，保留相应位的值。
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
       }
-      fill(255 * color1);  // 最左上角代表0，黑色。填充的颜色（灰度）值大于最大值就不画？
-      rect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+      // 不用矩形而是填充像素点
+      for (int dx = 0; dx < cellWidth; dx++) {
+        for (int dy = 0; dy < cellHeight; dy++) {
+          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + min(x * cellWidth + dx,image1.width - 1)] = color(color1 * 255);
+        }
+      }
     }
   }
+  image1.updatePixels();
+  image(image1, 0, 0);
 }
 void mousePressed() {
   if (mouseButton == LEFT) {
@@ -86,7 +95,7 @@ void mousePressed() {
 void keyPressed() {
   if (key == 's') {
     String s = String.format("your_output/c_AND_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-    saveFrame(s);
+    image1.save(s);
     println(String.format("已保存：%s", s));
   }
 }
