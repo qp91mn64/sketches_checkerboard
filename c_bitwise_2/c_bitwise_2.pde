@@ -16,16 +16,20 @@ int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入索引值
 int xMax;
 int yMax;
+int areaWidth;  // 每种位运算的区域宽度
+int areaHeight;  // 每种位运算的区域高度
 int whichBitwiseOperator = 3;  // 1:按位与& 2:按位或| 3:按位异或^
 int colorZero = 0;  // 0 对应黑色
 int colorOne = 255;  // 1 对应白色
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
 PImage image1;
 void setup() {
-  size(1536, 512);  // 有 3 个区域，故 width 是 height 的 3 倍
+  size(1536, 512);  // width 最好是 height 的 3 倍；如果电脑屏幕分辨率不够就调整一下
   noStroke();
-  xMax = (width / 3 - 1) / cellWidth + 1;  // 防止 width 不能被 cellWidth 整除时的灰边
-  yMax = (height - 1) / cellHeight + 1;  // 防止 height 不能被 cellHeight 整除时的灰边
+  areaWidth = width / 3;  // 整除
+  areaHeight = height;
+  xMax = (areaWidth - 1) / cellWidth + 1;  // 防止 areaWidth 不能被 cellWidth 整除时的黑边
+  yMax = (areaHeight - 1) / cellHeight + 1;  // 防止areaHeight 不能被 cellHeight 整除时的黑边
   int i = 2;
   while (i < max(xMax, yMax)) {  // 只考虑这么多格子即可
     i *= 2;                      // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
@@ -33,7 +37,7 @@ void setup() {
   }                              // 最后 lastBits 位也不包括符号位
   println(i, lastBits);
   println(a, binary(a, lastBits));
-  image1 = createImage(width, height, RGB);
+  image1 = createImage(3 * areaWidth, areaHeight, RGB);  // 这样保存的图片就没有由于 width 不能被 3 整除产生的灰边了
 }
 void draw() {
   int result;
