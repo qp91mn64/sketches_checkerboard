@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/2/5
+ * 2026/1/22 - 2026/2/7
  * 
  * 用按位与得到类似谢尔宾斯基三角形分形图
  * 迭代理解，方式1：从最细节开始构建，点阵从小到大
@@ -52,23 +52,27 @@ int cellWidth = 1;  // 格子宽度
 int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入索引值，取其补码中所有 1 所在位
 int a1 = 1;
+int xMax;
+int yMax;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
 void setup() {
   size(512, 512);
   noStroke();
+  xMax = (width - 1) / cellWidth + 1;  // 防止 width 不能被 cellWidth 整除时的灰边
+  yMax = (height - 1) / cellHeight + 1;  // 防止 height 不能被 cellHeight 整除时的灰边
   int i = 2;
-  while (i < max(width, height)) {  // 2 的 lastBits 次幂不小于画布宽度与高度的较大者时
-    i *= 2;                         // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
-    lastBits += 1;                  // 与其余位无关，可以忽略，无论 a 正负
-  }                                 // 最后 lastBits 位也不包括符号位
+  while (i < max(xMax, yMax)) {  // 只考虑这么多格子即可
+    i *= 2;                      // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
+    lastBits += 1;               // 与其余位无关，可以忽略，无论 a 正负
+  }                              // 最后 lastBits 位也不包括符号位
   println(i, lastBits);
   println("a", a, binary(a, lastBits));
   println(a1, binary(a1, lastBits));
 }
 void draw() {
   int color1;
-  for (int x = 0; x < (width - 1) / cellWidth + 1; x++) {  // 这样当 width 不能被 cellWidth 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
-    for (int y = 0; y < (height - 1) / cellHeight + 1; y++) {  // 这样当 height 不能被 cellHeight 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
+  for (int x = 0; x < xMax; x++) {
+    for (int y = 0; y < yMax; y++) {
       color1 = (x & y) & a;  // 先把坐标x、y按位与再和变量 a 按位与，保留相应位的值。
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
@@ -79,7 +83,7 @@ void draw() {
   }
 }
 void mousePressed() {
-  if (mouseButton == LEFT && (a1 << 1) > 0 && (a1<<1) < max(width, height)) {  // 防止 a1 变成负数再按位右移的时候高位变成 1。这里为了配合 lastBits 就进一步限制 a1 范围，会影响交互细节
+  if (mouseButton == LEFT && (a1 << 1) > 0 && (a1<<1) < max(xMax, yMax)) {  // 防止 a1 变成负数再按位右移的时候高位变成 1。这里为了配合 lastBits 就进一步限制 a1 范围，会影响交互细节
     a1 = (a1<<1);  // 按位左移一位
     a += a1;  // 再加到 a,相当于把 a 的高一位置 1
     println("a", a, binary(a, lastBits));

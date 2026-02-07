@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/2/6
- * 最近一次修改时间：2026/2/7
+ * 最近一次修改时间：2026/2/8
  * 
  * 主要修改自 c_XOR_2
  * 结合 c_XOR_3_I_C 中画图案的类方法
@@ -17,6 +17,8 @@
 int cellWidth = 1;  // 格子宽度
 int cellHeight = 1;  // 格子高度
 int a = 1;  // 引入索引值
+int xMax;
+int yMax;
 int whichBitwiseOperator = 3;  // 1:按位与& 2:按位或| 3:按位异或^
 int colorZero = 0;  // 0 对应黑色
 int colorOne = 255;  // 1 对应白色
@@ -25,11 +27,13 @@ PImage image1;
 void setup() {
   size(512, 512);
   noStroke();
+  xMax = (width - 1) / cellWidth + 1;  // 防止 width 不能被 cellWidth 整除时的灰边
+  yMax = (height - 1) / cellHeight + 1;  // 防止 height 不能被 cellHeight 整除时的灰边
   int i = 2;
-  while (i < max(width, height)) {  // 2 的 lastBits 次幂不小于画布宽度与高度的较大者时
-    i *= 2;                         // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
-    lastBits += 1;                  // 与其余位无关，可以忽略，无论 a 正负
-  }                                 // 最后 lastBits 位也不包括符号位
+  while (i < max(xMax, yMax)) {  // 只考虑这么多格子即可
+    i *= 2;                      // 能画在画布上的图形只取决于 a 的补码最后 lastBits 位
+    lastBits += 1;               // 与其余位无关，可以忽略，无论 a 正负
+  }                              // 最后 lastBits 位也不包括符号位
   println(i, lastBits);
   println(a, binary(a, lastBits));
   image1 = createImage(width, height, RGB);
@@ -39,8 +43,8 @@ void draw() {
   int color1;
   int b = 0;
   image1.loadPixels();
-  for (int x = 0; x < (width - 1) / cellWidth + 1; x++) {  // 这样当 width 不能被 cellWidth 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
-    for (int y = 0; y < (height - 1) / cellHeight + 1; y++) {  // 这样当 height 不能被 cellHeight 整除时，画布就不会空一部分了；能整除时，保持恰好画满不变
+  for (int x = 0; x < xMax; x++) {
+    for (int y = 0; y < yMax; y++) {
       if (whichBitwiseOperator == 1) {
         b = x & y;
       } else if (whichBitwiseOperator == 2) {
