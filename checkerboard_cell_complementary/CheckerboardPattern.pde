@@ -55,26 +55,26 @@ class CheckerboardPattern extends Pattern {
     //noStroke();
     //fill(127);
     //rect(x0, y0, areaWidth, areaHeight);
-    int W = areaWidth / a + 1;
-    int H = areaHeight / a + 1;
+    int W = (areaWidth - 1) / a + 1;
+    int H = (areaHeight - 1) / a + 1;
+    int color1;
     int dx;
     int dy;
+    int dx1;
+    int dy1;
     for (int i = 0; i < W * H; i++) {
       dx = i % W;
       dy = i / W;
-      if ((dx+dy)%2==0) {fill(255);} else {fill(0);}
-      if (dx != W - 1) {
-        if (dy != H - 1) {
-          rect(x0 + dx * a, y0 + dy * a, a, a);
-        } else {
-          rect(x0 + dx * a, y0 + dy * a, a, min(a, areaHeight % a));
-        }
+      if ((dx + dy) % 2 == 0) {
+        color1 = 255;
       } else {
-        if (dy != H - 1) {
-          rect(x0 + dx * a, y0 + dy * a, min(a, areaWidth % a), a);
-        } else {
-          rect(x0 + dx * a, y0 + dy * a, min(a, areaWidth % a), min(a, areaHeight % a));
-        }
+        color1 = 0;
+      }
+      // 不用矩形而是填充像素点
+      for (int j = 0; j < a * a; j++) {
+        dx1 = j % a;
+        dy1 = j / a;
+        pixels[(y0 + min(dy * a + dy1, areaHeight - 1)) * width + x0 + min(dx * a + dx1, areaWidth - 1)] = color(color1);
       }
     }
   }

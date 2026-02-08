@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/2/6
+ * 2026/1/15 - 2026/2/9
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -59,19 +59,23 @@ void setup() {
   }
   dataMax = i;
   grid = new Grid(w, h, dataMax, dataMin);
+  loadPixels();
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
       pattern.display(x * W, y * H, W, H, int(pow(2, grid.data[y][x])));  // 调用子类里面的 display 方法即可
     }
   }
+  updatePixels();
 }
 void draw() {
   if (r) {
+    loadPixels();
     for (int x = 0; x < w; x++) {
       for (int y = 0; y < h; y++) {
         pattern.display(x * W, y * H, W, H, int(pow(2, grid.data[y][x])));  // 调用子类里面的 display 方法即可
       }
     }
+    updatePixels();
     r = !r;
   }
 }
@@ -83,11 +87,15 @@ void mousePressed() {
   }
   if (mouseButton == LEFT) {
     grid.updateValue(x, y, '+');
+    loadPixels();
     pattern.display(x * W, y * H, W, H, int(pow(2, grid.data[y][x])));  // 调用子类里面的 display 方法即可
+    updatePixels();
     isSaved = false;
   } else if (mouseButton == RIGHT) {
     grid.updateValue(x, y, '-');
+    loadPixels();
     pattern.display(x * W, y * H, W, H, int(pow(2, grid.data[y][x])));  // 调用子类里面的 display 方法即可
+    updatePixels();
     isSaved = false;
   }
 }

@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/2/6
+ * 2026/1/15 - 2026/2/9
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -41,13 +41,16 @@ void setup() {
     i++;
   }
   dataMax = i;
+  loadPixels();
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
       checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
     }
   }
+  updatePixels();
 }
 void draw() {
+  loadPixels();
   if (r) {
     for (int x = 0; x < w; x++) {
       for (int y = 0; y < h; y++) {
@@ -56,6 +59,7 @@ void draw() {
     }
   r = !r;
   }
+  updatePixels();
 }
 void mousePressed() {
   x = mouseX / W;  // 矩形区域 x 坐标
@@ -65,11 +69,15 @@ void mousePressed() {
   }
   if (mouseButton == LEFT && data[y][x] < dataMax) {
     data[y][x]++;
+    loadPixels();
     checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+    updatePixels();
     isSaved = false;
   } else if (mouseButton == RIGHT && data[y][x] > dataMin) {
     data[y][x]--;
+    loadPixels();
     checkerboard(x * W, y * H, W, H, int(pow(2, data[y][x])));
+    updatePixels();
     isSaved = false;
   }
 }
@@ -114,26 +122,26 @@ void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight,
   // int checkerboardHeight: 棋盘格区域高度
   // int a: 棋盘格内每个小格子边长
   // 返回值: 无
-  int W = checkerboardWidth / a + 1;
-  int H = checkerboardHeight / a + 1;
+  int W = (checkerboardWidth - 1) / a + 1;
+  int H = (checkerboardHeight - 1) / a + 1;
+  int color1;
   int dx;
   int dy;
+  int dx1;
+  int dy1;
   for (int i = 0; i < W * H; i++) {
     dx = i % W;
     dy = i / W;
-    if ((dx+dy)%2==0) {fill(255);} else {fill(0);}
-    if (dx != W - 1) {
-      if (dy != H - 1) {
-        rect(x0 + dx * a, y0 + dy * a, a, a);
-      } else {
-        rect(x0 + dx * a, y0 + dy * a, a, min(a, checkerboardHeight % a));
-      }
+    if ((dx + dy) % 2 == 0) {
+      color1 = 255;
     } else {
-      if (dy != H - 1) {
-        rect(x0 + dx * a, y0 + dy * a, min(a, checkerboardWidth % a), a);
-      } else {
-        rect(x0 + dx * a, y0 + dy * a, min(a, checkerboardWidth % a), min(a, checkerboardHeight % a));
-      }
+      color1 = 0;
+    }
+    // 不用矩形而是填充像素点
+    for (int j = 0; j < a * a; j++) {
+      dx1 = j % a;
+      dy1 = j / a;
+      pixels[(y0 + min(dy * a + dy1, checkerboardHeight - 1)) * width + x0 + min(dx * a + dx1, checkerboardWidth - 1)] = color(color1);
     }
   }
 }
