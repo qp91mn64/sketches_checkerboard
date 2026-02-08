@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/2/6
- * 最近一次修改时间：2026/2/6
+ * 最近一次修改时间：2026/2/8
  *
  * c_XOR_3_I 的黑白互补版本，C 指 Complementary
  * 大多数代码复用自之前的草图 c_XOR_3_I 和 checkerboard_cell_complementary
@@ -35,11 +35,15 @@ void setup() {
   dataMax = i - 1;
   dataMin = ~dataMax;  // - dataMax - 1
   grid = new Grid(w, h, dataMax, dataMin);
+  loadPixels();
   drawAll();  // 初始化画布
+  updatePixels();
 }
 void draw() {
   if (r) {
+    loadPixels();
     drawAll();  // 优化：只有重置全画
+    updatePixels();
     r = !r;
   }
 }
@@ -51,11 +55,15 @@ void mousePressed() {
   }
   if (mouseButton == LEFT) {
     grid.updateValue(x, y, '+');  // 加1
+    loadPixels();
     drawPattern(x, y);
+    updatePixels();
     isSaved = false;
   } else if (mouseButton == RIGHT) {
     grid.updateValue(x, y, '-');  // 减1
+    loadPixels();
     drawPattern(x, y);
+    updatePixels();
     isSaved = false;
   }
 }

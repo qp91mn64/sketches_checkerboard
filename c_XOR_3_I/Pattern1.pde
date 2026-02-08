@@ -8,10 +8,12 @@ class Pattern1 extends Pattern {
     int color1;
     int cellWidth = 1;
     int cellHeight = 1;
-    int W = areaWidth / cellWidth + 1;
-    int H = areaHeight / cellHeight + 1;
+    int W = (areaWidth - 1) / cellWidth + 1;
+    int H = (areaHeight - 1) / cellHeight + 1;
     int dx;
     int dy;
+    int dx1;
+    int dy1;
     for (int i = 0; i < W * H; i++) {
       dx = i % W;
       dy = i / W;
@@ -19,9 +21,12 @@ class Pattern1 extends Pattern {
       if (color1 != 0) {
         color1 = 1;  // 只要有一位是 1，就把颜色取 1，相当于对计算结果所有位取或运算
       }
-      fill(255 * color1);  // 最左上角代表0，黑色。填充的颜色（灰度）值大于最大值就不画？
-      rectMode(CORNERS);
-      rect(x0 + dx * cellWidth, y0 + dy * cellHeight, min(x0 + (dx+1) * cellWidth, x0+areaWidth), min(y0 + (dy + 1) * cellHeight, y0 + areaHeight));
+      // 不用矩形而是填充像素点
+      for (int j = 0; j < cellWidth * cellHeight; j++) {
+        dx1 = j % cellWidth;
+        dy1 = j / cellWidth;
+        pixels[(y0 + min(dy * cellHeight + dy1, areaHeight - 1)) * width + x0 + min(dx * cellWidth + dx1, areaWidth - 1)] = color(color1 * 255);
+      }
     }
   }
 }

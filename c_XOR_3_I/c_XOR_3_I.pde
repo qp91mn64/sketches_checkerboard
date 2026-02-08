@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/1/27
- * 最近一次修改时间：2026/2/6
+ * 最近一次修改时间：2026/2/8
  * 在 c_XOR_2.pde 画棋盘格推广的基础上
  * 借助 checkerboard_cell_interaction_2 （编写时间：2026/1/15 - 2026/1/20）的代码框架
  * 实现点击鼠标就能用不同图案画图形
@@ -31,19 +31,23 @@ void setup() {
   }
   dataMax = i - 1;
   grid = new Grid(w, h, dataMax, dataMin);
+  loadPixels();
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
       pattern.display(x * W, y * H, W, H, grid.data[y][x]);  // 调用子类里面的 display 方法即可
     }
   }
+  updatePixels();
 }
 void draw() {
   if (r) {
+    loadPixels();
     for (int x = 0; x < w; x++) {
       for (int y = 0; y < h; y++) {
         pattern.display(x * W, y * H, W, H, grid.data[y][x]);  // 调用子类里面的 display 方法即可
       }
     }
+    updatePixels();
     r = !r;
   }
 }
@@ -55,11 +59,15 @@ void mousePressed() {
   }
   if (mouseButton == LEFT) {
     grid.updateValue(x, y, '+');
+    loadPixels();
     pattern.display(x * W, y * H, W, H, grid.data[y][x]);  // 调用子类里面的 display 方法即可
+    updatePixels();
     isSaved = false;
   } else if (mouseButton == RIGHT) {
     grid.updateValue(x, y, '-');
+    loadPixels();
     pattern.display(x * W, y * H, W, H, grid.data[y][x]);  // 调用子类里面的 display 方法即可
+    updatePixels();
     isSaved = false;
   }
 }
