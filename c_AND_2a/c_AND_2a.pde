@@ -55,7 +55,6 @@ int a1 = 1;
 int xMax;
 int yMax;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
-PImage image1;
 void setup() {
   size(512, 512);
   noStroke();
@@ -69,10 +68,10 @@ void setup() {
   println(i, lastBits);
   println("a", a, binary(a, lastBits));
   println(a1, binary(a1, lastBits));
-  image1 = createImage(width, height, RGB);
 }
 void draw() {
   int color1;
+  loadPixels();
   for (int x = 0; x < xMax; x++) {
     for (int y = 0; y < yMax; y++) {
       color1 = (x & y) & a;  // 先把坐标x、y按位与再和变量 a 按位与，保留相应位的值。
@@ -82,13 +81,12 @@ void draw() {
       // 不用矩形而是填充像素点
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
-          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + min(x * cellWidth + dx,image1.width - 1)] = color(color1 * 255);
+          pixels[min(y * cellHeight + dy, height - 1) * width + min(x * cellWidth + dx, width - 1)] = color(color1 * 255);
         }
       }
     }
   }
-  image1.updatePixels();
-  image(image1, 0, 0);
+  updatePixels();
 }
 void mousePressed() {
   if (mouseButton == LEFT && (a1 << 1) > 0 && (a1<<1) < max(xMax, yMax)) {  // 防止 a1 变成负数再按位右移的时候高位变成 1。这里为了配合 lastBits 就进一步限制 a1 范围，会影响交互细节
@@ -106,7 +104,7 @@ void mousePressed() {
 void keyPressed() {
   if (key == 's') {
     String s = String.format("your_output/c_AND_2a a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-    image1.save(s);
+    save(s);
     println(String.format("已保存：%s", s));
   }
 }

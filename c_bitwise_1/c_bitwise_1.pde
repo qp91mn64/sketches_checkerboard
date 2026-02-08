@@ -11,8 +11,6 @@
  * 数字 1 键：按位与
  * 数字 2 键：按位或
  * 数字 3 键：按位异或
- *
- * 在 PImage 的帮助下画图比原来快多了
  */
 int cellWidth = 1;  // 格子宽度
 int cellHeight = 1;  // 格子高度
@@ -23,7 +21,6 @@ int whichBitwiseOperator = 3;  // 1:按位与& 2:按位或| 3:按位异或^
 int colorZero = 0;  // 0 对应黑色
 int colorOne = 255;  // 1 对应白色
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
-PImage image1;
 void setup() {
   size(512, 512);
   noStroke();
@@ -36,13 +33,12 @@ void setup() {
   }                              // 最后 lastBits 位也不包括符号位
   println(i, lastBits);
   println(a, binary(a, lastBits));
-  image1 = createImage(width, height, RGB);
 }
 void draw() {
   int result;
   int color1;
   int b = 0;
-  image1.loadPixels();
+  loadPixels();
   for (int x = 0; x < xMax; x++) {
     for (int y = 0; y < yMax; y++) {
       if (whichBitwiseOperator == 1) {
@@ -61,13 +57,12 @@ void draw() {
       // 不用矩形而是填充像素点
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
-          image1.pixels[min(y * cellHeight + dy, image1.height - 1) * image1.width + min(x * cellWidth + dx,image1.width - 1)] = color(color1);
+          pixels[min(y * cellHeight + dy, height - 1) * width + min(x * cellWidth + dx, width - 1)] = color(color1);
         }
       }
     }
   }
-  image1.updatePixels();
-  image(image1, 0, 0);
+  updatePixels();
 }
 void mousePressed() {
   if (mouseButton == LEFT) {
@@ -99,7 +94,7 @@ void keyPressed() {
         s1 = "XOR";
       }
       String s = String.format("your_output/c_bitwise_1 %s a_%d_%s.png", s1, a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-      image1.save(s);
+      save(s);
       println(String.format("已保存：%s", s));
       break;
   }
