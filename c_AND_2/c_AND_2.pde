@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/2/8
+ * 2026/1/22 - 2026/2/10
  * 
  * 把画布看成网格
  * 每个格子 x、y 坐标的二进制表示
@@ -48,6 +48,7 @@ int a = 1;  // 引入索引值，取其补码中所有 1 所在位
 int xMax;
 int yMax;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
+boolean isSaved = false;  // 防止重复保存
 void setup() {
   size(512,512);
   noStroke();
@@ -84,15 +85,20 @@ void mousePressed() {
   if (mouseButton == LEFT) {
     a++;
     println(a, binary(a, lastBits));
+    isSaved = false;
   } else if (mouseButton == RIGHT) {
     a--;
     println(a, binary(a, lastBits));
+    isSaved = false;
   }
 }
 void keyPressed() {
   if (key == 's') {
-    String s = String.format("your_output/c_AND_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-    save(s);
-    println(String.format("已保存：%s", s));
+    if (!isSaved) {
+      String s = String.format("your_output/c_AND_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+      save(s);
+      println(String.format("已保存：%s", s));
+      isSaved = true;
+    }
   }
 }

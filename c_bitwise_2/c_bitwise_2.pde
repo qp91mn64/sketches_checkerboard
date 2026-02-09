@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/2/6
- * 最近一次修改时间：2026/2/8
+ * 最近一次修改时间：2026/2/10
  *
  * 修改自 c_bitwise_1
  *
@@ -20,6 +20,7 @@ int whichBitwiseOperator = 3;  // 1:按位与& 2:按位或| 3:按位异或^
 int colorZero = 0;  // 0 对应黑色
 int colorOne = 255;  // 1 对应白色
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
+boolean isSaved = false;  // 防止重复保存
 void setup() {
   size(1536, 512);  // width 最好是 height 的 3 倍；如果电脑屏幕分辨率不够就调整一下
   noStroke();
@@ -86,9 +87,11 @@ void mousePressed() {
   if (mouseButton == LEFT) {
     a++;
     println(a, binary(a, lastBits));
+    isSaved = false;
   } else if (mouseButton == RIGHT) {
     a--;
     println(a, binary(a, lastBits));
+    isSaved = false;
   }
 }
 void keyPressed() {
@@ -103,17 +106,20 @@ void keyPressed() {
       whichBitwiseOperator = 3;
       break;
     case 's':
-      int w1 = 3 * areaWidth;
-      PImage image1 = createImage(w1, areaHeight, RGB);  // 这样保存的图片就没有由于 width 不能被 3 整除产生的灰边了
-      loadPixels();
-      for (int i = 0; i < w1 * areaHeight; i++) {
-        int indexX = i % w1;
-        int indexY = i / w1;
-        image1.pixels[i] = pixels[indexY * width + indexX];
+      if (!isSaved) {
+        int w1 = 3 * areaWidth;
+        PImage image1 = createImage(w1, areaHeight, RGB);  // 这样保存的图片就没有由于 width 不能被 3 整除产生的灰边了
+        loadPixels();
+        for (int i = 0; i < w1 * areaHeight; i++) {
+          int indexX = i % w1;
+          int indexY = i / w1;
+          image1.pixels[i] = pixels[indexY * width + indexX];
+        }
+        String s = String.format("your_output/c_bitwise_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+        image1.save(s);
+        println(String.format("已保存：%s", s));
+        isSaved = true;
       }
-      String s = String.format("your_output/c_bitwise_2 a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-      image1.save(s);
-      println(String.format("已保存：%s", s));
       break;
   }
 }

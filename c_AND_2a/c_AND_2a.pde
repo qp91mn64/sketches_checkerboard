@@ -1,5 +1,5 @@
 /**
- * 2026/1/22 - 2026/2/8
+ * 2026/1/22 - 2026/2/10
  * 
  * 用按位与得到类似谢尔宾斯基三角形分形图
  * 迭代理解，方式1：从最细节开始构建，点阵从小到大
@@ -55,6 +55,7 @@ int a1 = 1;
 int xMax;
 int yMax;
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
+boolean isSaved = false;  // 防止重复保存
 void setup() {
   size(512, 512);
   noStroke();
@@ -94,17 +95,22 @@ void mousePressed() {
     a += a1;  // 再加到 a,相当于把 a 的高一位置 1
     println("a", a, binary(a, lastBits));
     println(a1, binary(a1, lastBits));
+    isSaved = false;
   } else if (mouseButton == RIGHT && (a1 >> 1) > 0) {  // 防止 a1 变成 0
     a -= a1;  // 先把 a 的高一位清 0
     a1=(a1>>1);  // 再把 a1 按位右移一位
     println("a", a, binary(a, lastBits));
     println(a1, binary(a1, lastBits));
+    isSaved = false;
   }
 }
 void keyPressed() {
   if (key == 's') {
-    String s = String.format("your_output/c_AND_2a a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
-    save(s);
-    println(String.format("已保存：%s", s));
+    if (!isSaved) {
+      String s = String.format("your_output/c_AND_2a a_%d_%s.png", a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+      save(s);
+      println(String.format("已保存：%s", s));
+      isSaved = true;
+    }
   }
 }
