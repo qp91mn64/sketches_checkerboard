@@ -26,29 +26,35 @@ class Grid {
   }
   void loadData(String fileName) {
     // 加载外部文本文件中的二维数据
-    // 格式要求是：行列数不限，每行的数据个数相同，而且用空格隔开，空格数量不限，允许行末空格
-    // 超出范围的数据会被截断
+    // 格式要求是：所有的数字是整数，数据之间空格隔开
+    // 空格数量不限，行首行末空格不影响
+    // 行列数不限
+    // 只加载前 h 行前 w 列, 多出的舍去，不足的视为 0，空行视为全 0
+    // 大于 dataMax 的视为 dataMax
+    // 小于 dataMin 的视为 dataMin
     String[] dataStrings = loadStrings(fileName);
-    String[] dataRow = splitTokens(dataStrings[0], " ");
-    int rows = dataStrings.length;
-    int columns = dataRow.length;
+    String[] dataRow;
     int value;
-    int[][] data_temp = new int[rows][columns];
-    for (int x = 0; x < columns; x++) {
-      data_temp[0][x] = Integer.valueOf(dataRow[x]);
-    }
-    for (int y = 1; y < rows; y++) {
+    int[][] data_temp = new int[h][w];
+    for (int y = 0; y < min(dataStrings.length, h); y++) {
       // 用 splitTokens() 是防止加载的文件出现连续空格时分割出空格
       dataRow = splitTokens(dataStrings[y], " ");
-      if (columns == 0) {
-        columns = dataRow.length;
-      } else if (columns != dataRow.length) {
-        println(String.format("警告：不是标准二维数据，第%d行数据有%d个，而上一行有%d个数据", y+1, dataRow.length, columns));
+      if (dataRow.length == 0) {
+        println(String.format("警告：第 %d 行是空行，视为全 0", y+1, dataRow.length - w));
+      } else if (dataRow.length > w) {
+        println(String.format("警告：第 %d 行多出 %d 个数据，舍去", y+1, dataRow.length - w));
+      } else if (dataRow.length < w) {
+        println(String.format("警告：第 %d 行缺少 %d 个数据，视为 0", y+1, w - dataRow.length));
       }
-      for (int x = 0; x < columns; x++) {
+      for (int x = 0; x < min(dataRow.length, w); x++) {
         value = Integer.valueOf(dataRow[x]);
-        data_temp[y][x] = max(min(value, dataMax), dataMin);  // 截断超出范围的数据防止保错等
+        data_temp[y][x] = max(min(value, dataMax), dataMin);  // 截断超出范围的数据
       }
+    }
+    if (dataStrings.length > h) {
+      println(String.format("警告：多出 %d 行，舍去", dataStrings.length - h));
+    } else if (dataStrings.length < h){
+      println(String.format("警告：缺少 %d 行，视为全 0", h - dataStrings.length));
     }
     data = data_temp;
   }

@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/2/6
- * 最近一次修改时间：2026/2/8
+ * 最近一次修改时间：2026/2/9
  *
  * c_XOR_3_I 的黑白互补版本，C 指 Complementary
  * 大多数代码复用自之前的草图 c_XOR_3_I 和 checkerboard_cell_complementary

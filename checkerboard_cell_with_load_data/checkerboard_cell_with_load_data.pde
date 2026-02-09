@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/1/17
+ * 2026/1/15 - 2026/2/9
  *
  * 演示读取文本文件中的数据再画图案
  * 这样就可以用现成数据
@@ -62,25 +62,31 @@ void checkerboard(int x0, int y0, int checkerboardWidth, int checkerboardHeight,
 }
 int[][] loadData(String fileName) {
   String[] dataStrings = loadStrings(fileName);
-  String[] dataRow = splitTokens(dataStrings[0], " ");
-  int rows = dataStrings.length;
-  int columns = dataRow.length;
-  int[][] data = new int[rows][columns];
-  for (int x = 0; x < columns; x++) {
-    data[0][x] = Integer.valueOf(dataRow[x]);
-  }
-  for (int y = 1; y < rows; y++) {
+  String[] dataRow;
+  int value;
+  int[][] data;
+  int[][] data_temp = new int[h][w];
+  for (int y = 0; y < min(dataStrings.length, h); y++) {
     // 保存用的什么分隔符，读取就用什么分隔符分开。
     // 用 splitTokens() 是防止加载的文件出现连续空格时分割出空格
     dataRow = splitTokens(dataStrings[y], " ");
-    if (columns == 0) {
-      columns = dataRow.length;
-    } else if (columns != dataRow.length) {
-      println(String.format("警告：不是标准二维数据，第%d行数据有%d个，而上一行有%d个数据", y+1, dataRow.length, columns));
+    if (dataRow.length == 0) {
+      println(String.format("警告：第 %d 行是空行，视为全 0", y+1, dataRow.length - w));
+    } else if (dataRow.length > w) {
+      println(String.format("警告：第 %d 行多出 %d 个数据，舍去", y+1, dataRow.length - w));
+    } else if (dataRow.length < w) {
+      println(String.format("警告：第 %d 行缺少 %d 个数据，视为 0", y+1, w - dataRow.length));
     }
-    for (int x = 0; x < columns; x++) {
-      data[y][x] = Integer.valueOf(dataRow[x]);
+    for (int x = 0; x < min(dataRow.length, w); x++) {
+      value = Integer.valueOf(dataRow[x]);
+      data_temp[y][x] = max(value, 0);  // 负数视为 0
     }
   }
+  if (dataStrings.length > h) {
+    println(String.format("警告：多出 %d 行，舍去", dataStrings.length - h));
+  } else if (dataStrings.length < h){
+    println(String.format("警告：缺少 %d 行，视为全 0", h - dataStrings.length));
+  }
+  data = data_temp;
   return data;
 }
