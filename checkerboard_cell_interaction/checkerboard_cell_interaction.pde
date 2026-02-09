@@ -1,5 +1,5 @@
 /**
- * 2026/1/15 - 2026/2/9
+ * 2026/1/15 - 2026/2/10
  *
  * 棋盘格可视化数值演示
  * 点击鼠标左键、右键试一试
@@ -85,9 +85,8 @@ void keyPressed() {
   switch (key) {
     case 'r':
       // 重置
+      myReset();
       r = true;
-      data = new int[h][w];
-      isSaved = false;
       break;
     case 's':
       // 保存
@@ -156,4 +155,28 @@ void saveData(String fileName, int[][] data) {
     dataStrings[y] = s;
   }
   saveStrings(fileName, dataStrings);
+}
+void myReset() {
+  int[][] data1 = new int[h][w];
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      data1[i][j] = data[i][j];
+    }
+  }
+  data = new int[h][w];
+  // 防止交替按下 r、s 键重复保存
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+      if (!isSaved) {
+        break;
+      }
+      if (data1[i][j] != data[i][j]) {
+        isSaved = false;
+        break;
+      }
+    }
+    if (!isSaved) {
+      break;
+    }
+  }
 }

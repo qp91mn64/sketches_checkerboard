@@ -71,9 +71,8 @@ void keyPressed() {
   switch (key) {
     case 'r':
       // 重置
-      grid.reset();
+      myReset();
       r = true;
-      isSaved = false;
       break;
     case 's':
       // 保存
@@ -127,4 +126,28 @@ void mySave() {
   grid.saveData(fileName);
   image1.save(s + ".png");
   println(String.format("已保存：%s", s));
+}
+void myReset() {
+  int[][] data1 = new int[grid.h][grid.w];
+  for (int i = 0; i < grid.h; i++) {
+    for (int j = 0; j < grid.w; j++) {
+      data1[i][j] = grid.data[i][j];
+    }
+  }
+  grid.reset();
+  // 防止交替按下 r、s 键重复保存
+  for (int i = 0; i < grid.h; i++) {
+    for (int j = 0; j < grid.w; j++) {
+      if (!isSaved) {
+        break;
+      }
+      if (data1[i][j] != grid.data[i][j]) {
+        isSaved = false;
+        break;
+      }
+    }
+    if (!isSaved) {
+      break;
+    }
+  }
 }
