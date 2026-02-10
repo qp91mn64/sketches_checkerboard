@@ -1,6 +1,6 @@
 /**
  * 创建时间：2026/2/6
- * 最近一次修改时间：2026/2/10
+ * 最近一次修改时间：2026/2/11
  * 
  * 主要修改自 c_XOR_2
  * 结合 c_XOR_3_I_C 中画图案的类方法
@@ -22,6 +22,7 @@ int colorZero = 0;  // 0 对应黑色
 int colorOne = 255;  // 1 对应白色
 int lastBits = 1;  // a 补码的最后 lastBits 位放进图片名
 boolean isSaved = false;  // 防止重复保存
+String bitwiseString = "XOR";
 void setup() {
   size(512, 512);
   noStroke();
@@ -33,7 +34,7 @@ void setup() {
     lastBits += 1;               // 与其余位无关，可以忽略，无论 a 正负
   }                              // 最后 lastBits 位也不包括符号位
   println(i, lastBits);
-  println(a, binary(a, lastBits));
+  println(bitwiseString, a, binary(a, lastBits));
 }
 void draw() {
   int result;
@@ -68,11 +69,11 @@ void draw() {
 void mousePressed() {
   if (mouseButton == LEFT) {
     a++;
-    println(a, binary(a, lastBits));
+    println(bitwiseString, a, binary(a, lastBits));
     isSaved = false;
   } else if (mouseButton == RIGHT) {
     a--;
-    println(a, binary(a, lastBits));
+    println(bitwiseString, a, binary(a, lastBits));
     isSaved = false;
   }
 }
@@ -81,32 +82,30 @@ void keyPressed() {
     case '1':
       if (whichBitwiseOperator != 1) {
         whichBitwiseOperator = 1;
+        bitwiseString = "AND";
+        println(bitwiseString, a, binary(a, lastBits));
         isSaved = false;
       }
       break;
     case '2':
       if (whichBitwiseOperator != 2) {
         whichBitwiseOperator = 2;
+        bitwiseString = "OR";
+        println(bitwiseString, a, binary(a, lastBits));
         isSaved = false;
       }
       break;
     case '3':
       if (whichBitwiseOperator != 3) {
         whichBitwiseOperator = 3;
+        bitwiseString = "XOR";
+        println(bitwiseString, a, binary(a, lastBits));
         isSaved = false;
       }
       break;
     case 's':
       if (!isSaved) {
-        String s1 = "XOR";
-        if (whichBitwiseOperator == 1) {
-          s1 = "AND";
-        } else if (whichBitwiseOperator == 2) {
-          s1 = "OR";
-        } else if (whichBitwiseOperator == 3) {
-          s1 = "XOR";
-        }
-        String s = String.format("your_output/c_bitwise_1 %s a_%d_%s.png", s1, a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
+        String s = String.format("your_output/c_bitwise_1 %s a_%d_%s.png", bitwiseString, a, binary(a, lastBits));  // 最后几位放进图片名即可，这样便于对照
         save(s);
         println(String.format("已保存：%s", s));
         isSaved = true;
