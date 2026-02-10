@@ -1,13 +1,13 @@
 # sketches_checkerboard 不只是棋盘格
 
-![示例图片3](c_XOR_3_I_C/examples/example1.png)  
+![示例图片3](c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png)  
+[c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png](c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png)
+
+![示例图片2](c_XOR_3_I_C/examples/example1.png)  
 [c_XOR_3_I_C/examples/example1.png](c_XOR_3_I_C/examples/example1.png)
 
-![示例图片2](checkerboard_cell_complementary/examples/data_4726.png)  
+![示例图片](checkerboard_cell_complementary/examples/data_4726.png)  
 [checkerboard_cell_complementary/examples/data_4726.png](checkerboard_cell_complementary/examples/data_4726.png)
-
-![示例图片](checkerboard_cell_interaction/examples/data_7179.png)  
-[checkerboard_cell_interaction/examples/data_7179.png](checkerboard_cell_interaction/examples/data_7179.png)
 
 从画棋盘格开始探索，已有多种不同图案可用于画图，也发现了不同的分形。
 
@@ -80,11 +80,21 @@
 
 #### 比较不同位运算的图形
 
-- `c_bitwise_1`：一次只画一种位运算，切换不同位运算看不同图形
+- `c_bitwise_1`：一次只画一种位运算
 - `c_bitwise_2`：放一起比较
 
 使用方式：点鼠标改变 `a` 值看不同图形，其中左键加 1 右键减 1。可以对照控制台输出值与画出的图形。按 `s` 键保存图片。  
-对 `c_bitwise_1`，按下数字 `1` 键看按位与的图形，数字 `2` 键按位或，数字 `3` 键按位异或，默认按位异或。
+对 `c_bitwise_1`，按数字 `1`、`2`、`3` 键看不同图形，分别对应按位与、按位或、按位异或，默认按位异或
+
+### 直接填充颜色，画出新图案
+
+位运算结果直接填充颜色，于是得到各种不同灰度
+
+- `c_bitwise_3`：画灰度图，一次只画一种位运算
+- `c_bitwise_4`：画灰度图，放一起比较
+
+使用方式：点鼠标改变 `a` 值看不同图形，其中左键加 1 右键减 1。可以对照控制台输出值与画出的图形。按 `s` 键保存图片。  
+对 `c_bitwise_3`，按数字 `1`、`2`、`3` 键看不同图形，分别对应按位与、按位或、按位异或，默认按位异或
 
 ### 拆分与复用代码
 
