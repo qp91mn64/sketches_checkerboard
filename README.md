@@ -1,5 +1,9 @@
 # sketches_checkerboard 不只是棋盘格
 
+<p align="center">
+  简体中文 | <a href="README_en.md">English</a>
+</p>
+
 ![示例图片2](bitwise/c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png)  
 [bitwise/c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png](bitwise/c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png)
 
