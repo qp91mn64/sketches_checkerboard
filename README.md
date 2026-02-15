@@ -4,8 +4,8 @@
   简体中文 | <a href="README_en.md">English</a>
 </p>
 
-![示例图片2](bitwise/c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png)  
-[bitwise/c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png](bitwise/c_bitwise_3/examples/c_bitwise_3_OR_a_255_11111111.png)
+![示例图片2](bitwise/c_bitwise_5/examples/c_bitwise_5_XOR_a_-43319_s20260214225328_722359_43322.png)  
+[bitwise/c_bitwise_5/examples/c_bitwise_5_XOR_a_-43319_s20260214225328_722359_43322.png](bitwise/c_bitwise_5/examples/c_bitwise_5_XOR_a_-43319_s20260214225328_722359_43322.png)
 
 ![示例图片](interactive_drawing/c_XOR_3_I_C/examples/example1.png)  
 [interactive_drawing/c_XOR_3_I_C/examples/example1.png](interactive_drawing/c_XOR_3_I_C/examples/example1.png)
