@@ -4,10 +4,13 @@
   <a href="README.md">简体中文</a> | English
 </p>
 
-![example_image2](bitwise/c_bitwise_5/examples/c_bitwise_5_XOR_a_-43319_s20260214225328_722359_43322.png)  
-[bitwise/c_bitwise_5/examples/c_bitwise_5_XOR_a_-43319_s20260214225328_722359_43322.png](bitwise/c_bitwise_5/examples/c_bitwise_5_XOR_a_-43319_s20260214225328_722359_43322.png)
+![Example_image3](bitwise/c_bitwise_9/examples/c_bitwise_9_AND_a_-7952_xOffset_98304_yOffset_32768_s20260223235338_784861_49976.png)  
+[bitwise/c_bitwise_9/examples/c_bitwise_9_AND_a_-7952_xOffset_98304_yOffset_32768_s20260223235338_784861_49976.png](bitwise/c_bitwise_9/examples/c_bitwise_9_AND_a_-7952_xOffset_98304_yOffset_32768_s20260223235338_784861_49976.png)
 
-![example_image](interactive_drawing/c_XOR_3_I_C/examples/example1.png)  
+![Example_image2](bitwise/c_bitwise_9/examples/c_bitwise_9_OR_a_-7764_xOffset_67584_yOffset_33792_s20260223234735_421814_26819.png)  
+[bitwise/c_bitwise_9/examples/c_bitwise_9_OR_a_-7764_xOffset_67584_yOffset_33792_s20260223234735_421814_26819.png](bitwise/c_bitwise_9/examples/c_bitwise_9_OR_a_-7764_xOffset_67584_yOffset_33792_s20260223234735_421814_26819.png)
+
+![Example_image](interactive_drawing/c_XOR_3_I_C/examples/example1.png)  
 [interactive_drawing/c_XOR_3_I_C/examples/example1.png](interactive_drawing/c_XOR_3_I_C/examples/example1.png)
 
 Start with checkerboard, discover patterns for drawing, and even some fractals.
