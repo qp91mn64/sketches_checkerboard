@@ -56,7 +56,7 @@ void draw() {
       color1 = a & b*b;  // Bitmask, and use the result as the color of pixels
       // So that the result between 256 and 16777215 draws something opaque. As a result we can see blue and other colors
       if (color1 > 255) {color1 = color1%16777216-16777216;}
-      // Use pixels[] instead of rect() for seppd
+      // Use pixels[] instead of rect() for speed
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
           pixels[min(y * cellHeight + dy, height - 1) * width + min(x * cellWidth + dx, width - 1)] = color(color1);

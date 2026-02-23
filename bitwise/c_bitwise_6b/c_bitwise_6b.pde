@@ -69,7 +69,7 @@ void draw() {
         b = x1 ^ y1;
       }
       color1 = a & b*b;  // Bitmask, and use the result as the color of pixels
-      // Use pixels[] instead of rect() for seppd
+      // Use pixels[] instead of rect() for speed
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
           image1.pixels[min(y * cellHeight + dy, height - 1) * width + min(x * cellWidth + dx, width - 1)] = color(color1);
