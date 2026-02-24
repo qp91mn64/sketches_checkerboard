@@ -27,7 +27,7 @@ int yMax;
 int whichBitwiseOperator = 3;  // 1:& 2:| 3:^
 String bitwiseString;
 void setup() {
-  size(1712, 1000);  // Patterns differ from each area; make sure your computer support such high resolution
+  size(1712, 1000);  // See more patterns on the screen; make sure your computer support such high resolution
   noStroke();
   xMax = (width - 1) / cellWidth + 1;  // Avoid grey egdes when `width` cannot be divided by `cellWidth`
   yMax = (height - 1) / cellHeight + 1;  // Avoid grey egdes when `height` cannot be divided by `cellHeight`

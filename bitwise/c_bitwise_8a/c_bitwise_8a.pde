@@ -55,7 +55,7 @@ void setup() {
   frameRate(64);
 }
 void draw() {
-  a--;  // As the change of `a` a bit doesn't change the screen too much, you may use something like `a+=2;` to make it change faster
+  a--;  // As the change of `a` a bit doesn't change the screen too much, you may use something like `a-=2;` to make it change faster
   int b = 0;
   int color1 = 0;
   int x1;
@@ -80,7 +80,6 @@ void draw() {
       for (int dx = 0; dx < cellWidth; dx++) {
         for (int dy = 0; dy < cellHeight; dy++) {
           // No usage of `color()`, no grayscale patterns
-          // Can you find colors?
           image1.pixels[min(y * cellHeight + dy, height - 1) * width + min(x * cellWidth + dx, width - 1)] = color1;
         }
       }

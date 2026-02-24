@@ -54,7 +54,7 @@ void setup() {
   frameRate(64);
 }
 void draw() {
-  a--;  // As the change of `a` a bit doesn't change the screen too much, you may use something like `a+=2;` to make it change faster
+  a--;  // As the change of `a` a bit doesn't change the screen too much, you may use something like `a-=2;` to make it change faster
   int b = 0;
   int color1 = 0;
   int x1;

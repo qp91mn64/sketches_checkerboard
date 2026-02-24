@@ -38,7 +38,7 @@ int whichBitwiseOperator = 3;  // 1:& 2:| 3:^
 String bitwiseString;
 PImage image1;
 void setup() {
-  size(1512, 712);  // Patterns differ from each area; make sure your computer support such high resolution
+  size(1512, 712);  // See more patterns on the screen; make sure your computer support such high resolution
   noStroke();
   xMax = (width - 1) / cellWidth + 1;  // Avoid grey egdes when `width` cannot be divided by `cellWidth`
   yMax = (height - 1) / cellHeight + 1;  // Avoid grey egdes when `height` cannot be divided by `cellHeight`
@@ -54,7 +54,7 @@ void setup() {
   frameRate(64);
 }
 void draw() {
-  a--;  // As the change of `a` a bit doesn't change the screen too much, you may use something like `a+=2;` to make it change faster
+  a--;  // As the change of `a` a bit doesn't change the screen too much, you may use something like `a-=2;` to make it change faster
   int b = 0;
   int color1 = 0;
   int x1;
