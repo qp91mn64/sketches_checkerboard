@@ -65,8 +65,8 @@ void draw() {
   for (int x = 0; x < xMax; x++) {
     for (int y = 0; y < yMax; y++) {
       // Calculate values near 4096
-      x1 = x + xOffset - x2;
-      y1 = y + yOffset - y2;
+      x1 = x + xOffset;
+      y1 = y + yOffset;
       if (whichBitwiseOperator == 1) {
         b = x1 & y1;
       } else if (whichBitwiseOperator == 2) {
@@ -88,8 +88,14 @@ void draw() {
   image(image1, 0, 0);
 }
 void mousePressed() {
-  if (x1 == 0) {x1 = mouseX;}
-  if (y1 == 0) {y1 = mouseY;}
+  if (x1 == 0) {
+    x1 = mouseX;
+    x2 = xOffset;
+  }
+  if (y1 == 0) {
+    y1 = mouseY;
+    y2 = yOffset;
+  }
   if (mouseButton == LEFT) {
     a++;
     println(bitwiseString, a, binary(a));
@@ -99,14 +105,10 @@ void mousePressed() {
   }
 }
 void mouseDragged() {
-  x2 = mouseX - x1;
-  y2 = mouseY - y1;
+  xOffset = x2 - (mouseX - x1);
+  yOffset = y2 - (mouseY - y1);
 }
 void mouseReleased() {
-  xOffset -= x2;
-  yOffset -= y2;
-  x2 = 0;
-  y2 = 0;
   println(String.format("xOffset:%d yOffset:%d", xOffset, yOffset));
   x1 = 0;
   y1 = 0;
